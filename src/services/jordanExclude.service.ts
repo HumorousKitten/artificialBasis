@@ -1,57 +1,34 @@
-import { IMatrixElem, TSelectedMatrixElem } from '../types/types'
-import { roundToTwoDecimalPlaces } from './roundToTwoDecimal.service'
+import { IMatrixElem, TresolvableElementCoord } from '../types/types'
+import { Fraction } from './fraction.service'
 
 export function jordanExclude(
 	matrix: Array<IMatrixElem[]>,
-	selectedElem: TSelectedMatrixElem
+	selectedElem: TresolvableElementCoord
 ): Array<IMatrixElem[]> {
 	const newMatrix = matrix.map((rowElem, indexRow) => {
-		return rowElem
-			.map((colElem, indexCol) => {
-				if(indexCol === selectedElem.col && indexRow === selectedElem.row){
-					return {
-						value: roundToTwoDecimalPlaces(
-							1 / colElem.value
-						),
-						row: colElem.row,
-						col: colElem.col
-					}
-				}
-				if (indexCol === selectedElem.col) {
-					return {
-						value:
-							colElem.value === 0
-								? 0
-								: -roundToTwoDecimalPlaces(
-										colElem.value / (selectedElem.elem as number)
-								  ),
-						row: colElem.row,
-						col: colElem.col,
-					}
-				}
-				if (indexRow === selectedElem.row) {
-					return {
-						value:
-							colElem.value === 0
-								? 0
-								: roundToTwoDecimalPlaces(
-										colElem.value / (selectedElem.elem as number)
-								  ),
-						row: colElem.row,
-						col: colElem.col,
-					}
-				}
-				return {
-					value: roundToTwoDecimalPlaces(
-						colElem.value -
-							(matrix[indexRow][selectedElem.col as number].value *
-								matrix[selectedElem.row as number][indexCol].value) /
-								(selectedElem.elem as number)
-					),
-					row: colElem.row,
-					col: colElem.col,
-				}
-			})
+		return rowElem.map((colElem, indexCol) => {
+			if (indexCol === selectedElem.col && indexRow === selectedElem.row) {
+				return new Fraction(colElem.denominator, colElem.numerator)
+			}
+			if (indexCol === selectedElem.col) {
+				return new Fraction(-colElem.numerator, colElem.denominator).divide(
+					selectedElem.elem as Fraction
+				)
+			}
+			if (indexRow === selectedElem.row) {
+				return new Fraction(colElem.numerator, colElem.denominator).divide(
+					selectedElem.elem as Fraction
+				)
+			}
+
+			const currentElem = new Fraction(colElem.numerator, colElem.denominator)
+
+			const multipliedElems = new Fraction(matrix[indexRow][selectedElem.col].numerator, matrix[indexRow][selectedElem.col].denominator).multiply(matrix[selectedElem.row as number][indexCol] as Fraction)
+
+			const dividedElems = new Fraction(multipliedElems.numerator, multipliedElems.denominator).divide(selectedElem.elem as Fraction)
+
+			return new Fraction(currentElem.numerator, currentElem.denominator).subtract(dividedElems)
+		})
 	})
 
 	return newMatrix

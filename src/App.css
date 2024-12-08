@@ -1,3 +1,16 @@
-.App section + section{
-	margin-top: 20px;
+.finalAnswer {
+	background: #ADD8E6;
+	width: 400px;
+	border-radius: 10px;
+	color: #000000;
+	font-size: 20px;
+}
+
+.finalAnswer h3 {
+	font-size: 25px;
+}
+
+
+.finalAnswer p {
+	margin-left: 20px;
 }
