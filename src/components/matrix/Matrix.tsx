@@ -70,8 +70,21 @@ const Matrix: FC<IMatrixProps> = ({
 		}
 		
 		if(searchSameElements(initialYcols.current, yCols)){
+			const xResult = new Map()
+			xCols.forEach(item => xResult.set(`X${item}`, 0))
+			const yValues = matrix.slice(0, matrix.length - 2).map(row => {
+				return row[0]
+			})
+
+			yCols.forEach((item, index) => xResult.set(item, yValues[index]))
+			const sortedMap = new Map(
+				Array.from(xResult.entries()).sort(
+					(a, b) => +a[0].match(/\d+/) - b[0].match(/\d+/)
+				)
+			)
 			setFinalAnswer({
-				status: 'Unsolvable',
+				status: 'NoSolutions',
+				xValues: Array.from(sortedMap),
 			})
 			return 
 		}

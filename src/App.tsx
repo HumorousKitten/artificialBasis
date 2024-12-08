@@ -4,8 +4,6 @@ import MatrixInputForm from './components/formMatrix/MatrixInputForm'
 import Matrix from './components/matrix/Matrix'
 import { IFinalResult, IMatrixElem, IMatrixList } from './types/types'
 
-
-
 function App() {
 	const [isMatrixForm, setIsMatrixForm] = React.useState<boolean>(true)
 	const [initialExpandedMatrix, setInitialExpandedMatrix] = React.useState<
@@ -69,7 +67,7 @@ function App() {
 			<section className='finalAnswer'>
 				{finalAnswer.status === 'Unsolvable' ? (
 					<div>
-						<h3>Задача не имеет решений</h3>
+						<h3>Задача неразрешима</h3>
 					</div>
 				) : finalAnswer.status === 'Optimal' ? (
 					<div>
@@ -119,6 +117,25 @@ function App() {
 							{finalAnswer.yColsLength && finalAnswer.xValues
 								? finalAnswer.xValues?.length - finalAnswer.yColsLength
 								: null}
+						</p>
+					</div>
+				) : finalAnswer.status === 'NoSolutions' ? (
+					<div>
+						<h3>Задача не имеет решения</h3>
+						<p>Начальный оптимальный план: </p>
+						<p>
+							x = (
+							{finalAnswer.xValues?.map(item => (
+								<span key={item[0]}>
+									{typeof item[1] === 'number'
+										? item[1]
+										: item[1].denominator === 1
+										? item[1].numerator
+										: item[1].numerator + '/' + item[1].denominator}
+									,
+								</span>
+							))}
+							) в R{finalAnswer.xValues?.length}
 						</p>
 					</div>
 				) : null}
