@@ -71,7 +71,7 @@ const Matrix: FC<IMatrixProps> = ({
 		
 		if(searchSameElements(initialYcols.current, yCols)){
 			setFinalAnswer({
-				status: 'NoSolutions',
+				status: 'Unsolvable',
 			})
 			return 
 		}

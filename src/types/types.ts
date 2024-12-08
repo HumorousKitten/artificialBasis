@@ -14,7 +14,7 @@ export type TresolvableElementCoord = { row: number; col: number, elem: IMatrixE
 export type TSearchResult = { status: 'Unsolvable' | 'Optimal'} | { status: 'Solvable'; elem: TresolvableElementCoord };
 
 export interface IFinalResult {
-	status: 'Unsolvable' | 'Optimal' | 'NoSolutions' | ''
+	status: 'Unsolvable' | 'Optimal'  | ''
 	f_result?: IMatrixElem
 	xValues?: Array<[string, number | IMatrixElem]>
 	yColsLength?: number

@@ -69,7 +69,7 @@ function App() {
 			<section className='finalAnswer'>
 				{finalAnswer.status === 'Unsolvable' ? (
 					<div>
-						<h3>Задача неразрешима</h3>
+						<h3>Задача не имеет решений</h3>
 					</div>
 				) : finalAnswer.status === 'Optimal' ? (
 					<div>
@@ -120,10 +120,6 @@ function App() {
 								? finalAnswer.xValues?.length - finalAnswer.yColsLength
 								: null}
 						</p>
-					</div>
-				) : finalAnswer.status === 'NoSolutions' ? (
-					<div>
-						<h3>Задача не имеет решений</h3>
 					</div>
 				) : null}
 			</section>
