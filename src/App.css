@@ -1,6 +1,6 @@
 .finalAnswer {
 	background: #ADD8E6;
-	width: 400px;
+	width: 40%;
 	border-radius: 10px;
 	color: #000000;
 	font-size: 20px;
@@ -13,4 +13,8 @@
 
 .finalAnswer p {
 	margin-left: 20px;
+}
+
+.optimalPlanResult > span + span {
+	margin-left: 5px;
 }

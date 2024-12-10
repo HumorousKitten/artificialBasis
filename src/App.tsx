@@ -72,7 +72,7 @@ function App() {
 				) : finalAnswer.status === 'Optimal' ? (
 					<div>
 						<h3>Оптимальный план задачи</h3>
-						<p>
+						<p className='optimalPlanResult'>
 							x = (
 							{finalAnswer.xValues?.map(item => (
 								<span key={item[0]}>
@@ -94,7 +94,7 @@ function App() {
 								  ' / ' +
 								  finalAnswer.f_result?.denominator}
 						</p>
-						<p>
+						<p className='optimalPlanResult'>
 							тогда решение задачи x = (
 							{finalAnswer.xValues
 								?.slice(
@@ -123,7 +123,7 @@ function App() {
 					<div>
 						<h3>Задача не имеет решения</h3>
 						<p>Начальный оптимальный план: </p>
-						<p>
+						<p className='optimalPlanResult'>
 							x = (
 							{finalAnswer.xValues?.map(item => (
 								<span key={item[0]}>

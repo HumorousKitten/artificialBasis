@@ -161,10 +161,10 @@ const Matrix: FC<IMatrixProps> = ({
 							<span style={{ display: 'none' }}>
 								Координаты матрицы: {indexRow} | {indexCol}
 							</span>
-							<span>
-								{colElem.numerator}{' '}
-								{colElem.denominator !== 1 ? ' / ' + colElem.denominator : null}
-							</span>
+							<p className={st.matrixValue}>
+								<span className={colElem.denominator !== 1 ? st.matrixValueCentralLine : ''}>{colElem.numerator}</span>
+								<span>{colElem.denominator !== 1 ? colElem.denominator : null}</span>
+							</p>
 						</div>
 					))
 				)}

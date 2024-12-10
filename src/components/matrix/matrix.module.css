@@ -50,6 +50,16 @@
 	grid-auto-rows: 50px;
 }
 
+.matrixValue {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.matrixValueCentralLine{
+	border-bottom: 2px solid black;
+}
+
 .gridElement {
 	border: 1px solid black;
 	width: 50px;

@@ -14,18 +14,14 @@ function findNesseccaryRow(matrix: Array<IMatrixElem[]>, col: number): number {
 			const divisor = row[col]
 			if (divisor.numerator <= 0) return null
 
-			return {
-				value: new Fraction(row[0].numerator, row[0].denominator).divide(
-					divisor as Fraction
-				),
-				rowCoord: rowIndex,
-			}
+			return new Fraction(row[0].numerator, row[0].denominator).divide(
+				divisor as Fraction)
 		})
-		.filter(Boolean) as { value: IMatrixElem; rowCoord: number }[]
 
-	return ratios.reduce((minElem, currentElem) =>
-		currentElem.value < minElem.value ? currentElem : minElem
-	).rowCoord
+
+		const positiveFractions = ratios.filter(item => item !== null)
+		const minFraction = findMinFraction(positiveFractions)
+		return ratios.indexOf(minFraction as Fraction)
 }
 
 function findMinElemInF(
