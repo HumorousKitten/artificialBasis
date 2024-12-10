@@ -13,9 +13,6 @@
 	margin-bottom: 15px;
 }
 
-.matrixForm {
-	border: 1px solid red;
-}
 
 .sizeMatrixForm {
 	display: flex;
@@ -63,7 +60,6 @@
   display: flex;
   justify-content: center;
   padding: 10px;
-  border: 1px solid red;
   background-color: #f9f9f9;
 	
 }
